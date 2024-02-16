@@ -1,20 +1,19 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:the_course_explorer/models/course.dart';
+import 'package:the_course_explorer/models/courseapi.dart';
 
 class CourseAPIService {
-  final String url = 'https://smsapp.bits-postman-lab.in/courses';
+  final String apiurl = 'https://smsapp.bits-postman-lab.in/courses';
 
-  Future<List<Course>> getCourse() async  {
-    final response = await http.get(url as Uri);
+  Future<List<Course>> fetchCourses() async  {
+    final response = await http.get(Uri.parse(apiurl));
 
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(response.body);
       return jsonResponse.map((course) => Course.fromJson(course)).toList();
 
     }  else {
-      throw Exception('Failed to Load Courses');
+      throw Exception('Unable to Load Courses');
     }
-
   }
 }

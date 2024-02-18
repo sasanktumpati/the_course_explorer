@@ -17,3 +17,11 @@ class CourseAPIService {
     }
   }
 }
+
+class CourseRepo {
+  final CourseAPIService _courseAPIService = CourseAPIService();
+
+  Future<List<Course>> fetchCourses() {
+    return _courseAPIService.fetchCourses();
+  }
+}

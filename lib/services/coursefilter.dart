@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:the_course_explorer/services/courserepo.dart';
 import 'package:the_course_explorer/models/courseapi.dart';
+import 'package:the_course_explorer/services/courseapi_service.dart';
 
 class CourseFilter extends ChangeNotifier {
   List<Course> _courses = [];

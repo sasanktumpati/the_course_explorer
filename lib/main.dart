@@ -50,13 +50,13 @@ class MyHomePage extends ConsumerWidget {
           color: Color(0xff001F3F),
           image: DecorationImage(
             fit: BoxFit.fitWidth,
-            image: AssetImage("assets/background_image.png"),
+            image: AssetImage("assets/background.png"),
           ),
         ),
         alignment: Alignment.center,
         padding: EdgeInsets.only(
-          right: MediaQuery.of(context).size.width * 0.00003,
-          left: MediaQuery.of(context).size.width * 0.00003,
+          right: MediaQuery.of(context).size.width * 0.003,
+          left: MediaQuery.of(context).size.width * 0.003,
           top: 50,
         ),
         child: Column(

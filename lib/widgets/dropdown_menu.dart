@@ -4,11 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class DropDownMenu extends ConsumerStatefulWidget {
   const DropDownMenu({
-    super.key,
+    Key? key,
     required this.list,
     required this.hintText,
     required this.choiceProvider,
-  });
+  }) : super(key: key);
 
   final StateProvider<String> choiceProvider;
   final List<String> list;
@@ -19,13 +19,7 @@ class DropDownMenu extends ConsumerStatefulWidget {
 }
 
 class _CustomDropDownMenuState extends ConsumerState<DropDownMenu> {
-  late String dropDownValue;
-
-  @override
-  void initState() {
-    super.initState();
-    dropDownValue = widget.list.first; // Setting to the first item in the list
-  }
+  String? dropDownValue;
 
   @override
   Widget build(BuildContext context) {
@@ -55,18 +49,31 @@ class _CustomDropDownMenuState extends ConsumerState<DropDownMenu> {
               softWrap: false,
               style: GoogleFonts.openSans(color: const Color(0xFFC0C0C0)),
             ),
-            items: widget.list.map<DropdownMenuItem<String>>((value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value, softWrap: false),
-              );
-            }).toList(),
+            items: [
+              DropdownMenuItem<String>(
+                value: '',
+                child: const Text(
+                  "Clear",
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+              ...widget.list.map<DropdownMenuItem<String>>((value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value, softWrap: false),
+                );
+              }).toList(),
+            ],
             onChanged: (value) {
               setState(() {
-                dropDownValue = value!;
+                if (value == '') {
+                  dropDownValue = null;
+                } else {
+                  dropDownValue = value;
+                }
                 ref
                     .watch(widget.choiceProvider.notifier)
-                    .update((state) => value);
+                    .update((state) => value!);
               });
             },
           ),

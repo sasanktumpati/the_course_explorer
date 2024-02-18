@@ -3,12 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../models/courseapi.dart';
 
-class filteredlist extends StatelessWidget {
-  const filteredlist({
-    super.key,
+class FilteredList extends StatelessWidget {
+  const FilteredList({
+    Key? key,
     required List<CourseAPI> courseList,
     required this.index,
-  }) : _courseList = courseList;
+  }) : _courseList = courseList, super(key: key);
 
   final List<CourseAPI> _courseList;
   final int index;
@@ -18,7 +18,7 @@ class filteredlist extends StatelessWidget {
     return Card(
       surfaceTintColor: Colors.transparent,
       elevation: 0,
-      borderOnForeground: false,
+      shadowColor: Colors.transparent,
       color: const Color.fromRGBO(10, 38, 61, 0.6),
       child: Padding(
         padding: const EdgeInsets.all(20),

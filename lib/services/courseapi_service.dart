@@ -15,12 +15,20 @@ Future<Courses> fetchCourse() async {
   }
 }
 
-final courseRepo = FutureProvider((ref) {
-  return http.get(Uri.parse('https://smsapp.bits-postman-lab.in/courses')).then(
-        (value) =>
-        Courses.fromJson(jsonDecode(value.body) as Map<String, dynamic>),
-  );
+final courseRepo = FutureProvider<Courses>((ref) {
+  return http.get(Uri.parse('https://smsapp.bits-postman-lab.in/courses'))
+      .then((response) {
+    if (response.statusCode == 200) {
+      return Courses.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+    } else {
+      throw Exception('Unable to Load Data. Check Your Connection and Try Again.');
+    }
+  })
+      .catchError((error) {
+    throw Exception('Failed to fetch data: $error');
+  });
 });
+
 
 final searchQuery = StateProvider<String>((ref) => '');
 

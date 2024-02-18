@@ -17,15 +17,14 @@ class SearchBox extends ConsumerWidget {
         decoration: ShapeDecoration(
             color: const Color(0xFF5451F1),
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18))),
+                borderRadius: BorderRadius.circular(10))),
         child: TextField(
           onChanged: (value) {
-            ref
-                .watch(searchQuery.notifier)
+            ref.watch(searchQuery.notifier)
                 .update((state) => value.toLowerCase());
           },
           style: GoogleFonts.openSans(
-              color: const Color(0xFFC0C0C0), fontSize: 13, height: 1.3),
+              color: const Color(0xFFC0C0C0), fontSize: 16, height: 1.3),
           cursorColor: Colors.white,
           cursorOpacityAnimates: true,
           decoration: InputDecoration(

@@ -12,19 +12,19 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple),
+        // useMaterial3: true, // Use this only if you are on Flutter 2.10 or later
       ),
       home: const MyHomePage(),
     );
@@ -32,15 +32,11 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends ConsumerWidget {
-  const MyHomePage({super.key});
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ref) {
-    final course = ref.watch(courseRepo).when(
-      data: (value) => value,
-      loading: () => null,
-      error: (error, stack) => error.toString(),
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final Future<Courses> course = ref.watch(courseRepo.future);
     List<String> yearList = ['1st', '2nd', '3rd', '4th'];
     List<String> departmentList = Department.values.map((e) => e.name).toList();
     return Scaffold(
@@ -55,8 +51,8 @@ class MyHomePage extends ConsumerWidget {
         ),
         alignment: Alignment.center,
         padding: EdgeInsets.only(
-          right: MediaQuery.of(context).size.width * 0.003,
-          left: MediaQuery.of(context).size.width * 0.003,
+          right: MediaQuery.of(context).size.width * 0.01,
+          left: MediaQuery.of(context).size.width * 0.01,
           top: 50,
         ),
         child: Column(
@@ -79,12 +75,18 @@ class MyHomePage extends ConsumerWidget {
                 ],
               ),
             ),
-            if (course == null)
-              const CircularProgressIndicator()
-            else if (course is List<Courses>)
-              const CourseViewHome()
-            else
-              const Text('Connection Lost'),
+            FutureBuilder<Courses>(
+              future: course,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else {
+                  return CourseViewHome(data: [snapshot.data!]);
+                }
+              },
+            ),
           ],
         ),
       ),

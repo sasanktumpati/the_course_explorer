@@ -1,41 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../widgets/coursecard.dart';
+
 import '../models/courseapi.dart';
 import '../services/courseapi_service.dart';
+import '../widgets/coursecard.dart';
 
 class CourseViewHome extends ConsumerWidget {
-  const CourseViewHome({
-    super.key,
-  });
+  const CourseViewHome({Key? key, required this.data}) : super(key: key);
+
+  final List<Courses> data;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final courses = ref.watch(courseRepo);
     return courses.when(
         data: (data) {
-          return ScrollableListView(data: data);
+          return ScrollableList(data: data);
         },
         error: (error, stackTrace) => Center(child: Text('Error: $error')),
-        loading: () => const Center(child: CircularProgressIndicator()));
+        loading: () => Center(child: CircularProgressIndicator()));
   }
 }
 
-class ScrollableListView extends ConsumerStatefulWidget {
-  const ScrollableListView({
-    super.key,
+class ScrollableList extends ConsumerStatefulWidget {
+  const ScrollableList({
+    Key? key,
     required this.data,
-  });
+  }) : super(key: key);
 
   final Courses data;
 
   @override
-  ConsumerState<ScrollableListView> createState() => _ScrollableListViewState();
+  ConsumerState<ScrollableList> createState() => _ScrollableListState();
 }
 
-class _ScrollableListViewState extends ConsumerState<ScrollableListView> {
+class _ScrollableListState extends ConsumerState<ScrollableList> {
   @override
   Widget build(BuildContext context) {
+    final ref = this.ref; // Access ref from the current state
+
     final textInput = ref.watch(searchQuery);
     final List<CourseAPI> courses;
     final selectedDepartment = ref.watch(depList);
@@ -61,7 +64,7 @@ class _ScrollableListViewState extends ConsumerState<ScrollableListView> {
       child: ListView.builder(
         itemCount: courses.length,
         itemBuilder: (context, index) {
-          return filteredlist(
+          return FilteredList(
             courseList: courses,
             index: index,
           );

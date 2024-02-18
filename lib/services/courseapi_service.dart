@@ -26,4 +26,4 @@ final searchQuery = StateProvider<String>((ref) => '');
 
 final depList = StateProvider<String>((ref) => '');
 
-final yearList = StateProvider<String>((ref) => '');
+final yearListProv = StateProvider<String>((ref) => '');

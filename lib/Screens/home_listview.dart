@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../coursecard.dart';
+import '../widgets/coursecard.dart';
 import '../models/courseapi.dart';
 import '../services/courseapi_service.dart';
 
@@ -39,7 +39,7 @@ class _ScrollableListViewState extends ConsumerState<ScrollableListView> {
     final textInput = ref.watch(searchQuery);
     final List<CourseAPI> courses;
     final selectedDepartment = ref.watch(depList);
-    final selectedYear = ref.watch(yearList);
+    final selectedYear = ref.watch(yearListProv);
 
     courses = widget.data.courses.where((element) {
       if (selectedYear.isNotEmpty && element.year != selectedYear) {

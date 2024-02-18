@@ -4,11 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class DropDownMenu extends ConsumerStatefulWidget {
   const DropDownMenu({
-    Key? key,
+    super.key,
     required this.list,
     required this.hintText,
     required this.choiceProvider,
-  }) : super(key: key);
+  });
 
   final StateProvider<String> choiceProvider;
   final List<String> list;
@@ -46,7 +46,7 @@ class _CustomDropDownMenuState extends ConsumerState<DropDownMenu> {
             iconSize: 20,
             isExpanded: true,
             value: dropDownValue,
-            style: GoogleFonts.openSans(color: Colors.white),
+            style: GoogleFonts.openSans(color: const Color(0xFFC0C0C0)),
             dropdownColor: const Color(0xFF5451F1),
             borderRadius: BorderRadius.circular(10),
             hint: Text(

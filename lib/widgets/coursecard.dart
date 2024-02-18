@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'models/courseapi.dart';
+import '../models/courseapi.dart';
 
 class filteredlist extends StatelessWidget {
   const filteredlist({

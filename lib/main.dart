@@ -74,7 +74,7 @@ class MyHomePage extends ConsumerWidget {
                   DropDownMenu(
                     list: yearList,
                     hintText: "Select Year",
-                    choiceProvider: yearList,
+                    choiceProvider: yearListProv,
                   )
                 ],
               ),

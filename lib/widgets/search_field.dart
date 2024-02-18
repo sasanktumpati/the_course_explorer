@@ -30,7 +30,7 @@ class SearchBox extends ConsumerWidget {
           decoration: InputDecoration(
               disabledBorder: InputBorder.none,
               border: InputBorder.none,
-              hintText: "Search...",
+              hintText: "Search.....",
               hintStyle:
               GoogleFonts.openSans(color: const Color.fromRGBO(192, 192, 192, 1), fontSize: 16)),
         ),

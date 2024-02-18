@@ -51,9 +51,9 @@ class _CustomDropDownMenuState extends ConsumerState<DropDownMenu> {
               style: GoogleFonts.openSans(color: const Color.fromRGBO(192, 192, 192, 1)),
             ),
             items: [
-              DropdownMenuItem<String>(
+              const DropdownMenuItem<String>(
                 value: '',
-                child: const Text(
+                child: Text(
                   "Clear",
                   style: TextStyle(color: Color.fromRGBO(0, 0, 0, 1)),
                 ),

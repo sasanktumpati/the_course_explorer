@@ -24,7 +24,7 @@ class SearchBox extends ConsumerWidget {
                 .update((state) => value.toLowerCase());
           },
           style: GoogleFonts.openSans(
-              color: const Color(0xFFC0C0C0), fontSize: 16, height: 1.3),
+              color: const Color.fromRGBO(190, 190, 190, 1), fontSize: 16, height: 1.3),
           cursorColor: Colors.white,
           cursorOpacityAnimates: true,
           decoration: InputDecoration(
@@ -32,7 +32,7 @@ class SearchBox extends ConsumerWidget {
               border: InputBorder.none,
               hintText: "Search...",
               hintStyle:
-              GoogleFonts.openSans(color: const Color(0xFFC0C0C0), fontSize: 16)),
+              GoogleFonts.openSans(color: const Color.fromRGBO(192, 192, 192, 1), fontSize: 16)),
         ),
       ),
     );

@@ -35,13 +35,70 @@ class CourseAPI {
       courseName: json["courseName"]);
 }
 
-enum Department { Computers, Electrical, Mechanical }
+enum Department { ComputerScience, Electrical, Mechanical }
 
 final departmentValues = EnumValues({
   "Elec.": Department.Electrical,
   "Mech.": Department.Mechanical,
-  "CS": Department.Computers
+  "CS": Department.ComputerScience
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class EnumValues<T> {
   Map<String, T> map;

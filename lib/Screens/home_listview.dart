@@ -6,7 +6,7 @@ import '../services/courseapi_service.dart';
 import '../widgets/coursecard.dart';
 
 class CourseViewHome extends ConsumerWidget {
-  const CourseViewHome({Key? key, required this.data}) : super(key: key);
+  const CourseViewHome({super.key, required this.data});
 
   final List<Courses> data;
 
@@ -18,15 +18,15 @@ class CourseViewHome extends ConsumerWidget {
           return ScrollableList(data: data);
         },
         error: (error, stackTrace) => Center(child: Text('Error: $error')),
-        loading: () => Center(child: CircularProgressIndicator()));
+        loading: () => const Center(child: CircularProgressIndicator()));
   }
 }
 
 class ScrollableList extends ConsumerStatefulWidget {
   const ScrollableList({
-    Key? key,
+    super.key,
     required this.data,
-  }) : super(key: key);
+  });
 
   final Courses data;
 

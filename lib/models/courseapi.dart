@@ -1,22 +1,49 @@
-class Course {
-  final String year;
-  final String department;
-  final String courseName;
-  final String courseCode;
+import 'dart:convert';
 
-  Course ({
+Courses courseFromJson(String str) => Courses.fromJson(json.decode(str));
+
+class Courses {
+  final List<CourseAPI> courses;
+
+  Courses({
+    required this.courses,
+  });
+
+  factory Courses.fromJson(Map<String, dynamic> json) => Courses(
+    courses: List<CourseAPI>.from(
+        json["courses"].map((x) => CourseAPI.fromJson(x))),
+  );
+}
+
+class CourseAPI {
+  final Department department;
+  final String year;
+  final String courseCode;
+  final String courseName;
+
+  CourseAPI({
     required this.department,
     required this.year,
     required this.courseCode,
-    required this.courseName}) {
-    throw UnimplementedError();
-  }
+    required this.courseName,
+  });
 
-  factory Course.fromJson(Map<String, dynamic> json) => Course(
-      year: json['year'],
-      courseName: json['courseName'],
-      courseCode: json['courseCode'],
-      department: json['department'],
-    );
+  factory CourseAPI.fromJson(Map<String, dynamic> json) => CourseAPI(
+      department: departmentValues.map[json["department"]]!,
+      year: json["year"],
+      courseCode: json["courseCode"],
+      courseName: json["courseName"]);
+}
 
+enum Department { Computers, Electrical, Mechanical }
+
+final departmentValues = EnumValues({
+  "Elec.": Department.Electrical,
+  "Mech.": Department.Mechanical,
+  "CS": Department.Computers
+});
+
+class EnumValues<T> {
+  Map<String, T> map;
+  EnumValues(this.map);
 }

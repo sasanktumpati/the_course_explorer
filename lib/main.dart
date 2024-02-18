@@ -23,8 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple),
-        // useMaterial3: true, // Use this only if you are on Flutter 2.10 or later
+        useMaterial3: true,
       ),
       home: const MyHomePage(),
     );

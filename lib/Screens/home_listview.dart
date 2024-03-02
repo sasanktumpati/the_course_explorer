@@ -37,7 +37,7 @@ class ScrollableList extends ConsumerStatefulWidget {
 class _ScrollableListState extends ConsumerState<ScrollableList> {
   @override
   Widget build(BuildContext context) {
-    final ref = this.ref; // Access ref from the current state
+    final ref = this.ref;
 
     final textInput = ref.watch(searchQuery);
     final List<CourseAPI> courses;
